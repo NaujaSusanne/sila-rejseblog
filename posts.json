@@ -1,0 +1,162 @@
+[
+ {
+  "id": 10,
+  "t": "Længst mod nord",
+  "p": "Qaanaaq, Grønland",
+  "c": "Is",
+  "d": "2026-09-21",
+  "h": 205,
+  "lat": 77.5,
+  "l": 64,
+  "k": 13,
+  "s": "Havisen, mørket og et folk, der kender begge dele.",
+  "x": [
+   "Qaanaaq er et af de nordligste steder, hvor mennesker bor. Her er havisen en vej, og mørket varer i måneder.",
+   "Jeg talte med en jæger om isens lyde. Han sagde, at man lytter mere, end man ser. Jeg lyttede, og isen svarede."
+  ]
+ },
+ {
+  "id": 9,
+  "t": "Et sted uden lyd",
+  "p": "Ikamiut, Grønland",
+  "c": "Mystik",
+  "d": "2026-07-08",
+  "h": 175,
+  "lat": 68.6,
+  "l": 29,
+  "k": 8,
+  "s": "En lille bygd i Diskobugten, hvor alt virker, som om det holder vejret.",
+  "x": [
+   "I Ikamiut er der næsten ingen. Husene står ved vandet, og både ligger på land, som om nogen lige er gået.",
+   "Jeg ventede på nogen, der aldrig kom. Til sidst forstod jeg, at stedet bare var sådan, og at det var nok."
+  ]
+ },
+ {
+  "id": 8,
+  "t": "De første spor",
+  "p": "Saqqaq, Grønland",
+  "c": "Mystik",
+  "d": "2026-05-17",
+  "h": 150,
+  "lat": 70.0,
+  "l": 38,
+  "k": 7,
+  "s": "Her boede mennesker for flere tusinde år siden. Noget er stadig tilbage.",
+  "x": [
+   "Saqqaq har givet navn til en af Grønlands ældste kulturer. Arkæologer har fundet redskaber og bopladser, der er over 4.000 år gamle.",
+   "Jeg stod på en bakke over bugten og prøvede at forestille mig dem. Vinden gav intet svar, men jeg blev stående længe."
+  ]
+ },
+ {
+  "id": 7,
+  "t": "Isfjorden",
+  "p": "Ilulissat, Grønland",
+  "c": "Is",
+  "d": "2026-03-30",
+  "h": 195,
+  "lat": 69.2,
+  "l": 73,
+  "k": 14,
+  "s": "Isen larmer og tier på skift, som om den lytter til dig.",
+  "x": [
+   "Isfjorden bliver aldrig stille. Kæmpe isbjerge knager og sprækker, og lyden kommer lidt forsinket, som et ekko fra en anden tid.",
+   "Jeg gik langs stien i midnatssolen og så isbjergene skifte farve. Man vænner sig ikke til det. Man bliver bare mindre."
+  ]
+ },
+ {
+  "id": 6,
+  "t": "Hundeslæde nord for polarcirklen",
+  "p": "Sisimiut, Grønland",
+  "c": "Eventyr",
+  "d": "2026-02-24",
+  "h": 185,
+  "lat": 66.9,
+  "l": 56,
+  "k": 11,
+  "s": "Tyve hunde, ingen vej og et landskab uden ende.",
+  "x": [
+   "I Sisimiut mødte jeg en fanger, der havde kørt slæde i over tredive år. Hundene vidste mere end jeg gjorde.",
+   "Vi kørte i timevis over frosne fjorde. Jeg hørte kun slædens knirken og hundenes åndedræt, og et sted bag os forsvandt byen."
+  ]
+ },
+ {
+  "id": 5,
+  "t": "Farver i øst",
+  "p": "Tasiilaq, Grønland",
+  "c": "Kultur",
+  "d": "2026-01-19",
+  "h": 210,
+  "lat": 65.6,
+  "l": 27,
+  "k": 4,
+  "s": "Farvede huse mod sort fjeld på en kyst, få besøger.",
+  "x": [
+   "Tasiilaq ligger på østkysten, isoleret af havis og afstand. Husene er røde, gule og blå mod sort sten og hvid sne.",
+   "Børn legede på isen, og hundene hylede i kor ved solnedgang. Jeg forstod ikke ordene, men jeg forstod stemningen."
+  ]
+ },
+ {
+  "id": 4,
+  "t": "Varmt vand mellem isbjergene",
+  "p": "Uunartoq, Grønland",
+  "c": "Natur",
+  "d": "2025-12-06",
+  "h": 160,
+  "lat": 60.5,
+  "l": 42,
+  "k": 9,
+  "s": "En varm kilde midt i kulden, og damp der stiger op af havet.",
+  "x": [
+   "På Uunartoq springer en varm kilde frem ved havkanten. Jeg lå i vandet, mens isbjerge drev forbi i det fjerne.",
+   "Kulden trak i ansigtet, varmen i kroppen. Det føltes, som om jeg var to steder på samme tid."
+  ]
+ },
+ {
+  "id": 3,
+  "t": "Stilhed i Arsuk",
+  "p": "Arsuk, Grønland",
+  "c": "Natur",
+  "d": "2025-11-02",
+  "h": 200,
+  "lat": 61.2,
+  "l": 31,
+  "k": 6,
+  "s": "En lille bygd ved en fjord, hvor isen driver forbi uden et ord.",
+  "x": [
+   "Der bor få mennesker i Arsuk, og fjorden gør resten af larmen. Isbjerge glider forbi med få meters mellemrum, langsomt og uden hast.",
+   "Jeg gik langs vandet, til det blev mørkt. Ingen lys, ingen biler, kun lyden af is, der knager et sted langt væk."
+  ]
+ },
+ {
+  "id": 2,
+  "t": "Stenene i Qaqortoq",
+  "p": "Qaqortoq, Grønland",
+  "c": "Kultur",
+  "d": "2025-10-08",
+  "h": 170,
+  "lat": 60.7,
+  "l": 24,
+  "k": 5,
+  "s": "Figurer hugget i klippen kigger ud over havnen, og de kigger tilbage.",
+  "x": [
+   "I Qaqortoq er billeder hugget direkte i fjeldet. Ansigter og skikkelser står i sten, som om de ventede på et skib.",
+   "Jeg sad ved springvandet i byens centrum, mens en gammel mand fortalte om vintrene før i tiden. Han sagde kun lidt, men nok."
+  ]
+ },
+ {
+  "id": 1,
+  "t": "Ankomst i Nuuk",
+  "p": "Nuuk, Grønland",
+  "c": "By",
+  "d": "2025-09-14",
+  "h": 190,
+  "lat": 64.2,
+  "l": 18,
+  "k": 3,
+  "s": "Byen ligger mellem fjeld og hav, og alt går langsomt.",
+  "x": [
+   "Flyet landede i regn, og Sermitsiaq stod skjult i tåge, som om bjerget ikke ville ses endnu. Jeg gik uden kort gennem byen og fandt lukkede døre og åbne kaffebarer.",
+   "Om aftenen holdt lyset sig længe. Folk talte stille, og havnen lugtede af salt og diesel. Her begynder rejsen."
+  ]
+ }
+]
