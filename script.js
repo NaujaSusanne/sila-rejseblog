@@ -1,10 +1,9 @@
-let POSTS=[],CATS=[];
+let POSTS=[],CATS=[],cat="Alle";
 const el=s=>document.querySelector(s);
 const app=el("#app");
-let cat="Alle";
 let S={likes:{},cm:{},mine:0,game:{won:0,best:0}};
-try{const r=localStorage.getItem("rejseblog");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
-function save(){try{localStorage.setItem("rejseblog",JSON.stringify(S))}catch(e){}}
+try{const r=localStorage.getItem("sila");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+function save(){try{localStorage.setItem("sila",JSON.stringify(S))}catch(e){}}
 
 function art(h,seed,v){
   let s=seed*7919+v*104729;
@@ -20,6 +19,9 @@ function art(h,seed,v){
   o+=`<rect y="130" width="400" height="75" fill="url(#m)"/></svg>`;
   return "data:image/svg+xml;utf8,"+encodeURIComponent(o);
 }
+const cover=p=>p.img||art(p.h,p.id,0);
+const gallery=(p,v)=>(p.gal&&p.gal[v-1])||art(p.h,p.id,v);
+const byId=i=>POSTS.find(p=>p.id===i)||POSTS[0];
 const fmt=d=>new Date(d).toLocaleDateString("da-DK",{day:"numeric",month:"long",year:"numeric"});
 const likes=p=>p.l+(S.likes[p.id]?1:0);
 const comments=p=>p.k+(S.cm[p.id]||[]).length;
@@ -27,31 +29,45 @@ const esc=t=>t.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&qu
 
 function home(){
   const list=POSTS.filter(p=>cat==="Alle"||p.c===cat);
-  app.innerHTML=`<div class="chips" role="group" aria-label="Filtrer efter kategori">${["Alle",...CATS].map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c} (${c==="Alle"?POSTS.length:POSTS.filter(p=>p.c===c).length})</button>`).join("")}</div>
-  <div class="grid">${list.map(p=>`<div class="card"><img src="${art(p.h,p.id,0)}" alt="Illustration fra ${p.p}"><div class="b"><div class="meta"><span class="badge">${p.c}</span><time>${fmt(p.d)}</time></div><h2>${p.t}</h2><p>${p.s}</p><div class="meta">♥ ${likes(p)} &nbsp; ${comments(p)} kommentarer</div><a class="btn" href="#p${p.id}">Læs mere</a></div></div>`).join("")}</div>`;
-  app.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.c;home()});
+  app.innerHTML=`
+  <div class="hero" id="hero"><div><h2>Udforsk. Drøm. Opdag.</h2><p>En rejseblog om ti steder i Grønland: is, stilhed og steder, de færreste ser.</p><a class="btn" href="#rejser">Start med at udforske</a></div></div>
+  <section><div class="tiles">
+    <a class="tile" href="#rejser"><div class="im"><img src="${cover(byId(6))}" alt=""></div><h3>Rejseblog</h3></a>
+    <a class="tile" href="#spil"><div class="im"><img src="${cover(byId(8))}" alt=""></div><h3>Rejse-memory</h3></a>
+    <a class="tile" href="#om"><div class="im"><img src="${cover(byId(1))}" alt=""></div><h3>Om bloggen</h3></a>
+  </div></section>
+  <div class="about" id="om"><div class="about-in"><img src="${cover(byId(10))}" alt="Qaanaaq"><div>
+    <h2 class="sec" style="text-align:left">Tak fordi du kigger forbi</h2>
+    <p>Jeg hedder Mads og er en fiktiv ung dansker, der holder sabbatår i Grønland. På ti steder fra Nuuk til Qaanaaq prøver jeg at forstå, hvorfor isen, stilheden og mørket trækker i mig.</p>
+    <p>Alle indlæg her er en del af en skoleopgave i HTML, CSS og JavaScript. Siden har en listevisning, enkeltindlæg med galleri, likes, kommentarer, filtrering og et memory-spil.</p>
+    <a class="btn" href="#spil">Prøv memory-spillet</a></div></div></div>
+  <section id="rejser"><h2 class="sec">Rejseguider</h2><p class="sub">Seneste indlæg fra Grønland</p>
+  <div class="chips" role="group" aria-label="Filtrer efter kategori">${["Alle",...CATS].map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c} (${c==="Alle"?POSTS.length:POSTS.filter(p=>p.c===c).length})</button>`).join("")}</div>
+  <div class="grid">${list.map(p=>`<a class="tile" href="#p${p.id}"><div class="im"><img src="${cover(p)}" alt="${p.p}"></div><div class="meta" style="margin-top:10px"><span class="tag">${p.c}</span><time>${fmt(p.d)}</time></div><h3>${p.t}</h3><p class="card-d">${p.s}</p><div class="meta">♥ ${likes(p)} &nbsp; ${comments(p)} kommentarer</div><span class="btn ghost" style="margin-top:6px">Læs mere →</span></a>`).join("")}</div></section>`;
+  el("#hero").style.backgroundImage=`url("${cover(byId(7))}")`;
+  app.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.c;home();el("#rejser").scrollIntoView()});
 }
 
 function post(p){
   const cms=S.cm[p.id]||[];
-  app.innerHTML=`<article><a class="btn ghost" href="#">← Alle indlæg</a>
-  <div class="meta"><span class="badge">${p.c}</span><time>${fmt(p.d)}</time><span>${p.p}</span></div>
+  app.innerHTML=`<section><article><a class="btn ghost" href="#">← Alle indlæg</a>
+  <div class="meta" style="margin-top:12px"><span class="tag">${p.c}</span><time>${fmt(p.d)}</time><span>${p.p}</span></div>
   <h1>${p.t}</h1>
-  <img class="hero" src="${art(p.h,p.id,0)}" alt="Illustration fra ${p.p}">
+  <img class="hero-img" src="${cover(p)}" alt="${p.p}">
   <div class="txt"><p><strong>${p.s}</strong></p>${p.x.map(t=>`<p>${t}</p>`).join("")}</div>
-  <div class="gal">${[1,2,3,4].map(v=>`<button data-v="${v}" aria-label="Forstør billede ${v}"><img src="${art(p.h,p.id,v)}" alt="Galleri ${v} fra ${p.p}"></button>`).join("")}</div>
-  <div class="act"><button class="like" id="like" aria-pressed="${!!S.likes[p.id]}"><span>♥</span> <span id="lc">${likes(p)}</span> likes</button><span id="cc">${comments(p)} kommentarer</span></div>
+  <div class="gal">${[1,2,3,4].map(v=>`<button data-v="${v}" aria-label="Forstør billede ${v}"><img src="${gallery(p,v)}" alt="Galleri ${v} fra ${p.p}"></button>`).join("")}</div>
+  <div class="act"><button class="like" id="like" aria-pressed="${!!S.likes[p.id]}">♥ <span id="lc">${likes(p)}</span> likes</button><span>${comments(p)} kommentarer</span></div>
   <h2 class="sm">Skriv en kommentar</h2>
   <form id="f"><input id="n" placeholder="Dit navn" required maxlength="30"><textarea id="m" rows="3" placeholder="Din kommentar" required maxlength="300"></textarea><button class="btn" type="submit">Send</button></form>
-  <div id="cl">${cms.map(c=>`<div class="cm"><b>${esc(c.n)}</b><br>${esc(c.m)}</div>`).join("")}</div></article>`;
+  <div>${cms.map(c=>`<div class="cm"><b>${esc(c.n)}</b><br>${esc(c.m)}</div>`).join("")}</div></article></section>`;
   el("#like").onclick=e=>{S.likes[p.id]=!S.likes[p.id];save();e.currentTarget.setAttribute("aria-pressed",!!S.likes[p.id]);el("#lc").textContent=likes(p);stats()};
   el("#f").onsubmit=e=>{e.preventDefault();(S.cm[p.id]=S.cm[p.id]||[]).push({n:el("#n").value,m:el("#m").value});save();post(p);stats()};
-  app.querySelectorAll(".gal button").forEach(b=>b.onclick=()=>{el("#big").src=art(p.h,p.id,+b.dataset.v);el("#dlg").showModal()});
+  app.querySelectorAll(".gal button").forEach(b=>b.onclick=()=>{el("#big").src=gallery(p,+b.dataset.v);el("#dlg").showModal()});
 }
 
 function game(n=6){
   let first=null,lock=false,moves=0,found=0;
-  app.innerHTML=`<a class="btn ghost" href="#">← Til bloggen</a><h1 class="gh">Rejse-memory</h1><p class="tag">Find de to billeder fra samme rejsemål. Hvert par åbner et indlæg fra bloggen.</p><div class="chips">${[[4,"Let"],[6,"Mellem"],[8,"Svær"]].map(([k,t])=>`<button class="chip" data-n="${k}" aria-pressed="${k===n}">${t}</button>`).join("")}</div><div class="meta"><b id="gm">0 træk</b></div><div class="mg" id="mg"></div><p id="found" aria-live="polite"></p>`;
+  app.innerHTML=`<section><a class="btn ghost" href="#">← Til bloggen</a><h1 class="gh">Rejse-memory</h1><p>Find de to billeder fra samme rejsemål. Hvert par åbner et indlæg.</p><div class="chips" style="justify-content:flex-start">${[[4,"Let"],[6,"Mellem"],[8,"Svær"]].map(([k,t])=>`<button class="chip" data-n="${k}" aria-pressed="${k===n}">${t}</button>`).join("")}</div><div class="meta"><b id="gm">0 træk</b></div><div class="mg" id="mg"></div><p id="found" aria-live="polite"></p></section>`;
   app.querySelectorAll(".chip").forEach(b=>b.onclick=()=>game(+b.dataset.n));
   const picks=POSTS.slice().sort(()=>Math.random()-.5).slice(0,n);
   const deck=[...picks,...picks].sort(()=>Math.random()-.5);
@@ -59,7 +75,7 @@ function game(n=6){
   deck.forEach(p=>{
     const b=document.createElement("button");
     b.className="mc";b.dataset.id=p.id;b.setAttribute("aria-label","Skjult kort");
-    b.innerHTML=`<span class="in"><span class="f bk">✦</span><span class="f fr"><img src="${art(p.h,p.id,0)}" alt=""><em>${p.p.split(",")[0]}</em></span></span>`;
+    b.innerHTML=`<span class="in"><span class="f bk">✦</span><span class="f fr"><img src="${cover(p)}" alt=""><em>${p.p.split(",")[0]}</em></span></span>`;
     b.onclick=()=>{
       if(lock||b.classList.contains("open")||b.classList.contains("done"))return;
       b.classList.add("open");b.setAttribute("aria-label",p.p);
@@ -95,14 +111,16 @@ function stats(){
 }
 
 function route(){
-  const m=location.hash.match(/^#p(\d+)$/), p=m&&POSTS.find(x=>x.id===+m[1]);
-  p?post(p):location.hash==="#spil"?game():home();
-  document.title=p?p.t+" – Sila":"Sila – rejseblog";
-  window.scrollTo(0,0);
+  const h=location.hash, m=h.match(/^#p(\d+)$/), p=m&&POSTS.find(x=>x.id===+m[1]);
+  if(p){post(p);window.scrollTo(0,0)}
+  else if(h==="#spil"){game();window.scrollTo(0,0)}
+  else{home();const t=(h==="#rejser"||h==="#om")&&el(h);t?t.scrollIntoView():window.scrollTo(0,0)}
+  document.title=p?p.t+" – SILA":"SILA – rejser i det hvide";
 }
 window.addEventListener("hashchange",route);
 el("#dlg").onclick=()=>el("#dlg").close();
 fetch("posts.json").then(r=>r.json()).then(d=>{
   POSTS=d;CATS=[...new Set(POSTS.map(p=>p.c))].sort();
   stats();route();
-}).catch(()=>{app.innerHTML="<p>Kunne ikke hente posts.json. Åbn siden via en lokal server (fx Live Server i VS Code) eller GitHub Pages.</p>"});
+}).catch(()=>{app.innerHTML="<section><p>Kunne ikke hente posts.json. Åbn siden via en lokal server (fx Live Server i VS Code) eller GitHub Pages.</p></section>"});
+
